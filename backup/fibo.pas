@@ -4,7 +4,7 @@ begin
   a:=1; b:=1; c :=1;
   Writeln('Vvedite poriadkovi nomer chisla:');
   Readln(n);
-  for i:=2 to n do //начинаем с 3 числа т.к. первые = 1
+  for i:=3 to n do //начинаем с 3 числа т.к. первые = 1
     begin
         c := a + b;
         a := b;
