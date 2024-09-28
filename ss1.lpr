@@ -1,86 +1,78 @@
-{$codepage UTF8}
-program ss1;
-uses math;
-var p, q, n, i, j: integer;
-    numberss10: QWord;
-    numb1, numb2: array[1..64] of integer;
+program sort;
+uses DateUtils;
+var
+  mass: array of integer;
+  i, n, a, IsSort, SortType, STime, ETime: integer;
 begin
-  write('Введите начальную СС: ');
-  readln(p);
-  write('введите конечную CC: ');
-  readln(q);
-
-  {Проверка на корректный ввод}
-  if (p < 2) or (q < 2) then
+  writeln('Выберите тип сортировки');
+  writeln('1- Простейший алгоритм сортировки');
+  readln(SortType);
+  if (SortType < 1) or (SortType > 1) then
     begin
-      writeln('Мощность СС не может быть меньше 2');
+      writeln('Укажите верный тип сортировки');
       readln();
       exit;
     end;
-
-  write('Введите длину исходного числа: ');
+  writeln('Введите длинну массива');
   readln(n);
+  STime:= Now;//начало замера времени
+  if (n < 1) or (n > 1000000) then
+  begin
+    writeln('Длина массива должна быть в пределах 0 > x > 1000000.');
+    readln();
+    exit;
+  end;
 
-  {Проверка на корректный ввод}
-  if (n > 64) or (n < 1) then
+  SetLength(mass, n);
+
+  randomize;
+  for i := 0 to n-1 do
+  begin
+    if random(2) = 0 then
+      mass[i] := Random(999)
+    else
+      mass[i] := -1*(Random(999))
+  end;
+
+
+  writeln('------------------------------неотсортированный массив---------------------------');
+  writeln();
+  for i := 0 to n-1 do
+  begin
+    write(mass[i], ' ');
+  end;
+
+//первый метод сортировки---------------------------------------
+if SortType = 1 then
+  begin
+    IsSort := 0;
+    while IsSort <> 1 do
     begin
-      writeln('Неправильный ввод!');
-      readln();
-      exit;
-    end;
-
-  {Ввод чисел исходного числа}
-  writeln('Введите цифры числа через пробел');
-  for i := 1 to n do
-    begin
-      read(numb1[i]);
-    end;
-
-  readln();
-
-  {Проверка введенных цифр}
-  for i := 1 to n do
-    begin
-      if (numb1[i] >= p) or (numb1[i] < 0) then
+      IsSort := 1; // Предполагаем, что массив отсортирован
+      for i := 0 to n-2 do
+      begin
+        if mass[i] > mass[i+1] then
         begin
-          writeln('Цифра не может быть больше или равна СС или меньше нуля');
-          readln();
-          exit;
+          a := mass[i];
+          mass[i] := mass[i+1];
+          mass[i+1] := a;
+          IsSort := 0; // Массив не отсортирован, устанавливаем IsSort в 0
+          break; // Прерываем цикл, так как нужно сделать еще один проход
         end;
+       end;
+      end;
     end;
+ //первый метод сортировки---------------------------------------
 
-  {Переводим в десятичную СС}
-  numberss10 := 0;
-  for i := 1 to n do
-    begin
-      numberss10 := numberss10 + numb1[n] * p ** (i - 1);
-      n := n - 1;
-    end;
+ ETime := Now;
 
-  {Проверка на допустимое число}
-  if numberss10 > 2147483647 then
-    begin
-      writeln('Число больше допустимого!');
-      readln();
-      exit;
-    end;
-
-  {Преревод из десятичной сс}
-  i := 0;
-  while numberss10 > 0 do
-    begin
-      numb2[i] := numberss10 mod q;
-      numberss10 := numberss10 div q;
-      i := i + 1;
-    end;
-
-  writeln('Полученное число');
-  for j := 1 to i do
-    begin
-      i := i - 1;
-      write(numb2[i], ' ');
-    end;
-
-  readln();
+//вывод итога сортировки
+  writeln();
+  writeln('------------------------------отсортированный массив---------------------------');
+  writeln();
+  for i := 0 to n-1 do
+  begin
+    write(mass[i], ' ');
+  end;
+  writeln('Сортировка заняла ', ETime-STime);
 end.
-
