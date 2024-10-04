@@ -9,16 +9,24 @@
         <Filename Value="ss1.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="47"/>
-        <CursorPos X="5" Y="78"/>
+        <TopLine Value="65"/>
+        <CursorPos Y="87"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory>
+    <JumpHistory HistoryIndex="2">
       <Position>
         <Filename Value="ss1.lpr"/>
         <Caret Line="6" Column="33"/>
+      </Position>
+      <Position>
+        <Filename Value="ss1.lpr"/>
+        <Caret Line="78" Column="5" TopLine="47"/>
+      </Position>
+      <Position>
+        <Filename Value="ss1.lpr"/>
+        <Caret Line="14" Column="86" TopLine="7"/>
       </Position>
     </JumpHistory>
     <RunParams>
